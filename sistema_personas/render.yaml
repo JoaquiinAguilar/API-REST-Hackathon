@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: api-rest-hackathon
+    env: python
+    region: oregon
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
+    startCommand: "gunicorn sistema_personas.wsgi:application"
+    autoDeploy: true
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: sistema_personas.settings
+      - key: SECRET_KEY
+        value: django-insecure-*v4!9khyum3h0!u6yy2fp&g^9f=(=^kth=dbfrhwva2auy_r!i
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: api-rest-hackathon.onrender.com
